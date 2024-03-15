@@ -1,0 +1,325 @@
+<style>
+  .swatch-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .swatch {
+    width: 90px;
+    height: 30.69px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+  }
+    .swatch1 {
+    width: 100px;
+    height: 30px;
+}
+  .swatch2 {
+    width: 100px;
+    height: 30px;
+}
+  .swatch3 {
+    width: 100px;
+    height: 30px;
+}
+  .swatch4 {
+    width: 100px;
+    height: 30px;
+}
+  .swatch5 {
+    width: 100px;
+    height: 30px;
+}
+  .swatch6 {
+    width: 100px;
+    height: 30px;
+}
+  .swatch7 {
+    width: 100px;
+    height: 30px;
+}
+  .swatch8 {
+    width: 100px;
+    height: 30px;
+}
+  /* Adjust swatch colors */
+  .swatch_1 { background-color: {{ section.settings.color_1 }}; }
+  .swatch_2 { background-color: {{ section.settings.color_2 }}; }
+  .swatch_3 { background-color: {{ section.settings.color_3 }}; }
+  .swatch_4 { background-color: {{ section.settings.color_4 }}; }
+  .swatch_5 { background-color: {{ section.settings.color_5 }}; }
+  .swatch_6 { background-color: {{ section.settings.color_6 }}; }
+  .swatch_7 { background-color: {{ section.settings.color_7 }}; }
+  .swatch_8 { background-color: {{ section.settings.color_8 }}; }
+
+  section#effect_new {
+    background-image: url(https://carbonre.com/wp-content/uploads/2023/05/homepage-diagonal-1.jpg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .container {
+    width: 1222px;
+    margin: 0 auto;
+  }
+
+  .vision_new {
+    background-color: transparent !important;
+    height: 100%;
+    padding: 50px 0;
+    width: 658px !important;
+    color: #fff;
+    margin-left: 100px;
+  }
+
+  .vision.box-right_new {
+    float: right !important;
+  }
+
+  .vision_des_new {
+    width: 74%;
+    margin-left: 90px;
+    background-color: #fff !important;
+    padding: 50px 30px; 
+    color: #000 !important;
+  }
+
+  .box-right .vision_new {
+    background-color: transparent !important;
+    height: 100%;
+    padding: 50px 0;
+    width: 658px !important;
+    color: #000 !important;
+    margin-right: 100px;
+    float: right !important;
+  }
+
+  .vision_3_new {
+    height: 100%;
+    color: #000;
+  }
+
+  .vision_hed_new {
+    width: 1222px;
+    margin: 0 auto;
+  }
+
+  h3.heading_new {
+    font-size: 40px;
+    font-weight: 500;
+    margin-bottom: 27px;
+    color: #000 !important;
+    font-family: Spline Sans, sans-serif;
+    line-height: 55px;
+  }
+
+  .custom-button_new {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #111312;
+    color: #ff4c4c;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .custom-button_new:hover {
+    background-color: #0056b3; 
+  }
+
+  .custom-button_new i {
+    margin-left: 5px;
+  }
+
+  @media (max-width:1024px) {
+    h3.heading_new {
+      font-size: 30px;
+      line-height: 35px;
+    }
+    section#effect_new .vision_des_new p {
+      font-size: 13px !important;
+      line-height: 22px;
+    }
+    section#effect_new .vision_des_new li {
+      font-size: 12px;
+      line-height: 21px;
+    }
+    section#effect_new .vision_new {
+      width: 88%;
+    }
+  }
+
+  @media (max-width:768px) {
+    section#effect_new {
+      background-image: url(https://carbonre.com/wp-content/uploads/2023/05/homepage-diagonal-1.jpg);
+      background-attachment: fixed;
+      background-repeat: inherit !important;
+      background-size: inherit !important;
+    }
+    section#effect_new .vision_new {
+      width: 100% !important;
+    }
+    .vision_des_new {
+      margin-left: 80px;
+      padding-right: 20px;
+    }
+  }
+
+  @media (max-width:480px) {
+    .vision_des_new {
+      margin-left: 30px;
+      padding-right: 10px;
+    }
+    h3.heading_new {
+      font-size: 20px;
+      line-height: 28px;
+    }
+  }
+</style>
+
+{% if section.settings.heading or section.settings.text %}
+  <section id="effect_new" class="paralaxEffect_new {% if section.settings.bg_image.src %}withbg_effect_new{% endif %}" {% if section.settings.bg_image.src %}style="background-image: url({{ section.settings.bg_image | img_url: 'original' }});" {% endif %}>
+    <div class="vision_3_new">
+      <div class="vision box_new-{{ section.settings.text_align }}" style="{{ section.settings.text_align }}">
+        <div class="vision_des_new"> 
+          {% if section.settings.heading != blank %}
+            <h3 class="heading_new">{{ section.settings.heading }}</h3>
+          {% endif %}
+          {% if section.settings.text != blank %}
+            <p>{{ section.settings.text }}</p>
+          {% endif %}
+
+          <div class="swatch-container">
+            {% for i in (1..8) %}
+              {% assign color_variable = 'color_' | append: i %}
+              {% if section.settings[color_variable] != blank %}
+                <div class="swatch{{ i }}" style="background-color: {{ section.settings[color_variable] }}">
+                  <div class="swatch_{{ i }}"></div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+
+          {% if section.settings.button != blank %}   
+            <button class="custom-button_new"> <span>{{ section.settings.button }}</span> </button>
+          {% endif %} 
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+
+{% schema %}
+
+{
+  "name": "Wide Range Parallax",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Section Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Pair text with an image to add details about your products, brand, and selling proposition.</p>"
+    },
+    {
+      "type": "color",
+      "id": "color_1",
+      "label": "Color 1",
+      "default": "#FF5733"
+    },
+    {
+      "type": "color",
+      "id": "color_2",
+      "label": "Color 2",
+      "default": "#33FF57"
+    },
+    {
+      "type": "color",
+      "id": "color_3",
+      "label": "Color 3",
+      "default": "#5733FF"
+    },
+    {
+      "type": "color",
+      "id": "color_4",
+      "label": "Color 4",
+      "default": "#FFFF33"
+    },
+    {
+      "type": "color",
+      "id": "color_5",
+      "label": "Color 5",
+      "default": "#33FFFF"
+    },
+    {
+      "type": "color",
+      "id": "color_6",
+      "label": "Color 6",
+      "default": "#FF33FF"
+    },
+    {
+      "type": "color",
+      "id": "color_7",
+      "label": "Color 7",
+      "default": "#FF5733"
+    },
+    {
+      "type": "color",
+      "id": "color_8",
+      "label": "Color 8",
+      "default": "#33FF57"
+    },
+    {
+      "type": "text",
+      "id": "button",
+      "label": "CTA Button"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "CTA Button Link"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text Align",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Wide Range Parallax",
+      "category": "Parallax Effect"
+    }
+  ]
+}
+
+{% endschema %}
+
