@@ -1,0 +1,54 @@
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/elevatezoom/3.0.8/jquery.elevatezoom.min.js"></script> 
+{%- assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' -%}
+                {%- if product.selected_or_first_available_variant.featured_media != null -%}
+                  {%- assign media = product.selected_or_first_available_variant.featured_media -%}
+                    <div class="js-tabs__content brator-product-img-tab-item product__media-item grid__item slider__slide{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ media.id }}">
+                      {% render 'product-thumbnail', media: media, position: 'featured', loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: true %}
+                    </div>
+                {%- endif -%}
+                {%- for media in product.media -%}
+                  {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
+                    <div class="image-container js-tabs__content brator-product-img-tab-item product__media-item grid__item slider__slide{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ media.id }}">
+                      {% render 'product-thumbnail', media: media, position: forloop.index, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: true %}
+                    </div>
+                   
+                  {%- endunless -%}
+                {%- endfor -%}
+<script>
+$(document).ready(function() {
+  $('.product__media-item img').elevateZoom({
+    zoomType: "window",
+    cursor: "crosshair",
+    zoomWindowFadeIn: 500,
+    zoomWindowFadeOut: 750,
+    zoomWindowPosition: 1, // Positioning the zoom window to the right
+    lensShape: "square",
+    lensSize: 200,
+    zoomWindowWidth: 400, // Adjust the width of the zoom window
+    zoomWindowHeight: 400 // Adjust the height of the zoom window
+  });
+});
+
+
+</script>
+<style>
+      <style>
+.product__media-item {
+  overflow: hidden;
+  position: relative;
+}
+
+.zoomContainer {
+  z-index: 9999;
+}
+
+.lens {
+  border: 1px solid #000;
+}
+
+.product__media-item img {
+  transition: transform 0.5s ease;
+}
+</style>
